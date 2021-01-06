@@ -1,0 +1,32 @@
+
+/* font family */
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500&display=swap");
+
+/* Basic CSS setting */
+* {
+  margin: 0;
+  padding: 0;
+  text-decoration: none;
+  list-style-type: none;
+  outline: none;
+  font-family: "Noto Sans KR";
+}
+
+#root{
+  width: 100vw;
+  padding-top: 3rem;
+}
+
+.flex-row-center{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+
+.flex-col-center{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
