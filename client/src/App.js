@@ -19,8 +19,8 @@ function App() {
       const res = await fetch(url);
       const output = await res.json();
       const key = Object.keys(output)[0];
-      const value = output[key];
-      console.log('output is', output)
+      const value = output[key]
+      console.log('output is', value)
       dispatch({
         type: 'SUCCESS',
         key: key,
@@ -55,7 +55,7 @@ function App() {
   }, [])
 
   useEffect(() => {
-    fetchData(BASE_URL.concat('/file/').concat(state.currentFile));
+    fetchData(BASE_URL.concat('/file/').concat(localStorage.getItem('CURRENT_FILE')));
   }, [state.currentFile])
 
   return (
@@ -73,10 +73,11 @@ function App() {
 
         <Route path='/edit'>
           <EditFile
-            currentFile={state.currentFile}
+            currentFile={localStorage.getItem('CURRENT_FILE')}
             fileData={state.curFileData}
             handleSubmit={handleSubmit}
             dispatch={dispatch}
+            loading={state.loading}
           />
         </Route>
 
