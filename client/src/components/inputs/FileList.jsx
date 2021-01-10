@@ -21,15 +21,18 @@ const inputStyled = css({
 
 export default function FileList({ data, dispatch }) {
   const histroy = useHistory();
-  console.log('dispatch is', dispatch)
+
   const onClick = (e) => {
-    let container = e.target.closest('.entry-file-container')
+    const container = e.target.closest('.entry-file-container');
+    const fileName = container.getAttribute('value');
+    localStorage.setItem('CURRENT_FILE', fileName)
     dispatch({
       type: 'SET_CURRENT_FILE',
-      value: container.getAttribute('value')
+      value: fileName
     })
     histroy.push('/edit')
   }
+
   return (
     <li style={{ marginBottom: "0.5rem" }} key={data.name}>
       <div

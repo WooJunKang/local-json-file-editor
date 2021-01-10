@@ -27,9 +27,6 @@ export default function reducer(state, action) {
         }
       })
 
-    // case "SUBMIT_DATA":
-
-
     default:
       return state;
   }

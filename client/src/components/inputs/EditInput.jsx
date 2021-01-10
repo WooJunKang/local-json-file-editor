@@ -1,8 +1,7 @@
 import { css } from 'glamor';
-import { useEffect, useState } from 'react';
 
 const basedStyle = css({
-  width: "40vw",
+  width: `calc(100% - 2rem)`,
   height: "4rem",
   padding: "0.25rem 1rem",
   fontSize: "1rem",
