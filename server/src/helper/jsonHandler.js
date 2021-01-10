@@ -1,13 +1,7 @@
 const fs = require('fs');
+const path = `${__dirname}/files`
 
 const jsonHandler = {
-
-  ////////////////
-  // 파일 리스트 출력
-
-  ////////////////
-
-
 
   // 파일 불러오기
   read: function (filePath, callBack) {
@@ -29,7 +23,7 @@ const jsonHandler = {
   // 내용 업데이트
   update: function (filePath, content) {
     fs.writeFile(filePath, content, err => { if (err) console.log(err) })
-  }
+  },
 
 
 

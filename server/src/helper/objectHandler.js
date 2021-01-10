@@ -22,6 +22,18 @@ const objectHandler = {
     return toReturn;
   },
 
+  unFlatten: function (data) {
+    var result = {}
+    for (var i in data) {
+      console.log(data)
+      var keys = i.split('.')
+      keys.reduce(function (acc, cur, idx) {
+        console.log(acc)
+        return acc[cur] || (acc[cur] = isNaN(Number(keys[idx + 1])) ? (keys.length - 1 == idx ? data[i] : {}) : [])
+      }, result)
+    }
+    return result;
+  }
 
 }
 

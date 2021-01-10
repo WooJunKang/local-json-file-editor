@@ -9,8 +9,11 @@ const objectHandler = require('./helper/objectHandler.js');
 const path = `${__dirname}/files`
 
 app.use(bodyParser.json());
+app.use(express.urlencoded({ extended: false }));
 app.use(cors(
-  { "origin": "http://localhost:3000" }
+  {
+    "origin": "http://localhost:3000",
+  }
 ))
 
 
@@ -30,9 +33,9 @@ app.get('/list', (req, res) => {
 
 })
 
-app.get('/file/:filename', (req, res) => {
+app.get('/file/:fileName', (req, res) => {
   console.log('req parms is', req.params)
-  const filePath = `${path}/${req.params.filename}`
+  const filePath = `${path}/${req.params.fileName}`
   jsonHandler.read(filePath, (err, contents) => {
     if (err) {
       console.log(err);
@@ -44,11 +47,14 @@ app.get('/file/:filename', (req, res) => {
   })
 })
 
-app.put('/file', (req, res) => {
-  const filePath = `${path}/${req.body.fileName}.json`
-  const newContent = JSON.stringify(req.body.content) // string
-  console.log('new content is: ', newContent)
-  jsonHandler.update(filePath, newContent)
+app.put('/file/:fileName', (req, res) => {
+  // console.log(req.body)
+  // console.log(req.url)
+  // console.log(req.params)
+  const filePath = `${path}/${req.params.fileName}`
+  const convertedContent = objectHandler.unFlatten(req.body.content)
+  jsonHandler.update(filePath, JSON.stringify(convertedContent))
+  res.send(convertedContent)
 })
 
 
