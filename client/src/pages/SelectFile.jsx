@@ -1,7 +1,7 @@
 
 import { FileList, PageHeader, PageDesc } from '../components';
 
-export default function SelectFile({ fileList, handleCurrentFile, loading }) {
+export default function SelectFile({ fileList, loading, dispatch }) {
   return (
     <>
       <PageHeader title={"파일 리스트"} />
@@ -12,7 +12,7 @@ export default function SelectFile({ fileList, handleCurrentFile, loading }) {
             <li>loading...</li>
           ) : (
               fileList.map(file => {
-                return <FileList key={file.name} data={file} handleCurrentFile={handleCurrentFile} />
+                return <FileList key={file.name} data={file} dispatch={dispatch} />
               })
             )
         }

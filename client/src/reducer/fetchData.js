@@ -23,9 +23,12 @@ export default function reducer(state, action) {
       return Object.assign({}, state, {
         curFileData: {
           ...state.curFileData,
-          [action.name]: action.value
+          [action.key]: action.value
         }
       })
+
+    // case "SUBMIT_DATA":
+
 
     default:
       return state;

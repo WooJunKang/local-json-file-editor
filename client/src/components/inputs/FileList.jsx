@@ -17,23 +17,23 @@ const inputStyled = css({
     cursor: "pointer"
   },
 
-  display: "flex",
-  flexDirection: "column",
-  justifyContent: "space-between"
-
 })
 
-export default function FileList({ data, handleCurrentFile }) {
+export default function FileList({ data, dispatch }) {
   const histroy = useHistory();
+  console.log('dispatch is', dispatch)
   const onClick = (e) => {
     let container = e.target.closest('.entry-file-container')
-    handleCurrentFile(container.getAttribute('value'))
+    dispatch({
+      type: 'SET_CURRENT_FILE',
+      value: container.getAttribute('value')
+    })
     histroy.push('/edit')
   }
   return (
     <li style={{ marginBottom: "0.5rem" }} key={data.name}>
       <div
-        className="entry-file-container"
+        className="entry-file-container flex-col-between"
         type="text"
         value={data.name}
         onClick={onClick}

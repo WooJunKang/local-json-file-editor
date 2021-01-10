@@ -1,18 +1,22 @@
 import { css } from 'glamor';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 const basedStyle = css({
   width: "40vw",
   height: "4rem",
   padding: "0.25rem 1rem",
   fontSize: "1rem",
-  letterSpacing: "2pt"
+  letterSpacing: "2pt",
+  '&:focus': {
+    border: "1px solid #3E8ACD"
+  },
 })
 
 
-export default function EditInput({ label, value, onChange }) {
+export default function EditInput({ label, value, dispatch }) {
 
-  const [inputVal, setInputVal] = useState(value)
+  // const [inputVal, setInputVal] = useState("")
+  // console.log(label, value)
 
 
   const idInputStyle = label === 'id' && (
@@ -23,17 +27,23 @@ export default function EditInput({ label, value, onChange }) {
     })
   )
 
-  // const onChange = (e) => {
-  //   setInputVal(e.target.value)
-  // }
+  const onChange = (e) => {
+    const { name, value } = e.target;
+    dispatch({
+      type: 'HANDLE_INPUT_CHANGE',
+      key: name,
+      value: value
+    })
+
+  }
 
   return (
     <li key={label} style={{ marginBottom: "0.5rem" }}>
       <label htmlFor={label}>
         <div>{label}</div>
-        <input
+        <textarea
           name={label}
-          value={inputVal}
+          value={value}
           onChange={onChange}
           readOnly={label === "id" && "readonly"}
           {...basedStyle}

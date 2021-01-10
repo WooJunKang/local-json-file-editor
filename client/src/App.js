@@ -31,29 +31,23 @@ function App() {
     }
   }
 
-  const onSubmit = (e) => {
-    e.preventDefault();
-    console.log('submit click!')
-    console.log(e.target)
+  const handleSubmit = async (data) => {
+    let body = {
+      content: data
+    }
+    try {
+      const res = await fetch(`${BASE_URL}/file/${state.currentFile}`,
+        {
+          method: "PUT",
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(body)
+        })
 
-
-  }
-
-  const onChange = (e) => {
-    const { name, value } = e.target;
-    dispatch({
-      type: 'HANDLE_INPUT_CHANGE',
-      key: name,
-      value: value
-    })
-
-  }
-
-  const handleCurrentFile = (name) => {
-    dispatch({
-      type: 'SET_CURRENT_FILE',
-      value: name
-    })
+    } catch (err) {
+      console.log(err);
+    }
   }
 
   useEffect(() => {
@@ -70,11 +64,20 @@ function App() {
       <Switch>
 
         <Route exact path='/'>
-          <SelectFile fileList={state.fileList} handleCurrentFile={handleCurrentFile} loading={state.loading} />
+          <SelectFile
+            fileList={state.fileList}
+            loading={state.loading}
+            dispatch={dispatch}
+          />
         </Route>
 
         <Route path='/edit'>
-          <EditFile currentFile={state.currentFile} fileData={state.curFileData} onSubmit={onSubmit} onChange={onChange} />
+          <EditFile
+            currentFile={state.currentFile}
+            fileData={state.curFileData}
+            handleSubmit={handleSubmit}
+            dispatch={dispatch}
+          />
         </Route>
 
       </Switch>
