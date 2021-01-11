@@ -46,3 +46,9 @@ button{
   flex-direction: column;
   justify-content: space-between;
 }
+
+.flex-row-around-center{
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}

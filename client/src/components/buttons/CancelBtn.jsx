@@ -29,7 +29,7 @@ export default function CancelBtn() {
   return (
     <input
       type="button"
-      value="취소"
+      value="뒤로가기"
       {...inputStyled}
       onClick={onClick}
     />

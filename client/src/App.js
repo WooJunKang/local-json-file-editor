@@ -8,7 +8,7 @@ function App() {
 
   const [state, dispatch] = useReducer(reducer, {
     fileList: [],
-    currentFile: null,
+    currentFile: localStorage.getItem('CURRENT_ITEM') || null,
     curFileData: {},
     loading: false
   })
@@ -44,7 +44,8 @@ function App() {
           },
           body: JSON.stringify(body)
         })
-
+      const result = await res.json();
+      console.log('saved: ', result)
     } catch (err) {
       console.log(err);
     }
